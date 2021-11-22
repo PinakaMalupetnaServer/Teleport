@@ -1,0 +1,17 @@
+name: Teleport
+main: Clarence2810\Teleport\teleport
+version: 3.0-reborn
+api: [3.0.0, 4.0.0]
+author: Clarence2810, princepines
+dependencies: 
+   - Slapper
+
+commands:
+  hub:
+    description: Teleport to Main Hub
+    alias:
+    - lobby
+  event:
+    description: Teleport to PotPvP Arena
+    alias:
+    - events
