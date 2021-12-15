@@ -33,10 +33,10 @@ class HubTask extends Task
                 return false;
             } */ // Ignored due to world lobby is loaded during startup!
             $this->timer--;
-            $player->sendTip(C::WHITE . "Please wait.");
+            $player->sendMessage(C::WHITE . "Please wait.");
             if ($this->timer <= 0) {
                 $player->getInventory()->clearAll();
-		$player->getArmorInventory()->clearAll();
+		        $player->getArmorInventory()->clearAll();
                 $player->teleport($level->getSafeSpawn());
 				$player->setGamemode(2);
 				$player->setGamemode(2);

@@ -16,7 +16,9 @@ use pocketmine\{
 class EventsTask extends Task
 {
     public $timer = 4;
-    public function __construct(teleport $main, $playerName){
+
+    public function __construct(teleport $main, $playerName)
+    {
         $this->main = $main;
         $this->playerName = $playerName;
     }
@@ -26,16 +28,16 @@ class EventsTask extends Task
         $player = $this->main->getServer()->getPlayerExact($this->playerName);
         $level = $this->main->getServer()->getLevelByName("Event");
         if ($player instanceof Player) {
-            if(in_array($player->getName(), teleport::$cancel)) $this->main->getScheduler()->cancelTask($this->getTaskId());
+            if (in_array($player->getName(), teleport::$cancel)) $this->main->getScheduler()->cancelTask($this->getTaskId());
             $this->main->getServer()->loadLevel("Event");
-            if (!$this->main->getServer()->isLevelLoaded("Event")){
+            if (!$this->main->getServer()->isLevelLoaded("Event")) {
                 $player->sendMessage("Something went wrong, please report it to princepines");
                 $this->main->getLogger()->alert("World 'Event' not Loaded properly, load it using /mw load Events");
                 $this->main->getScheduler()->cancelTask($this->getTaskId());
                 return false;
             }
             $this->timer--;
-            $player->sendTip(C::WHITE . "Going to Events..");
+            $player->sendMessage(C::WHITE . "Going to Events..");
             if ($this->timer <= 0) {
                 // $loc = new Position(-1736, 86, -202, $level);
                 $player->teleport($level->getSafeSpawn());
@@ -43,21 +45,9 @@ class EventsTask extends Task
                 $player->setGamemode(0);
                 $this->main->getScheduler()->cancelTask($this->getTaskId());
             }
-        }
-        else {
+        } else {
             $this->main->getScheduler()->cancelTask($this->getTaskId());
             return false;
-        }
-    }
-
-    public function onDamage(EntityDamageEvent $event) {
-        $victim = $event->getEntity();
-        if($victim->getLevelByName() == "server-spawn") {
-            if($event->getFinalDamage() >= $victim->getHealth()) {
-                $event->setCancelled();
-                // Now the player can't die!
-                // I would advise you set the players health back to full and handle the respawn in a way that won't confuse players (TP to spawn, clear inv, etc)
-            }
         }
     }
 }
