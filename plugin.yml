@@ -15,3 +15,8 @@ commands:
     description: Teleport to PotPvP Arena
     alias:
     - events
+  survival:
+    description: Teleport to Survival Mode
+    alias:
+    - sm
+    - survivalmode
