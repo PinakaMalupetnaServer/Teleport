@@ -40,6 +40,11 @@ class teleport extends PluginBase implements Listener
                     $this->getScheduler()->scheduleRepeatingTask(new EventsTask($this, $sender->getName()), 20);
                 }
                 break;
+            case "pvp":
+                if ($sender instanceof Player) {
+                    $this->getScheduler()->scheduleRepeatingTask(new PvPTask($this, $sender->getName()), 20);
+                }
+                break;
         }
         return true;
     }

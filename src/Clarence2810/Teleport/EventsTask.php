@@ -3,7 +3,6 @@
 namespace Clarence2810\Teleport;
 
 use Clarence2810\Teleport\teleport;
-use Clarence2810\Teleport\teleport;
 use pocketmine\{
     Player,
     scheduler\Task,
@@ -25,18 +24,18 @@ class EventsTask extends Task
     public function onRun(int $currentTick)
     {
         $player = $this->main->getServer()->getPlayerExact($this->playerName);
-        $level = $this->main->getServer()->getLevelByName("Events");
+        $level = $this->main->getServer()->getLevelByName("Event");
         if ($player instanceof Player) {
             if(in_array($player->getName(), teleport::$cancel)) $this->main->getScheduler()->cancelTask($this->getTaskId());
-            $this->main->getServer()->loadLevel("Events");
-            if (!$this->main->getServer()->isLevelLoaded("Events")){
+            $this->main->getServer()->loadLevel("Event");
+            if (!$this->main->getServer()->isLevelLoaded("Event")){
                 $player->sendMessage("Something went wrong, please report it to princepines");
-                $this->main->getLogger()->alert("World 'Events' not Loaded properly, load it using /mw load Events");
+                $this->main->getLogger()->alert("World 'Event' not Loaded properly, load it using /mw load Events");
                 $this->main->getScheduler()->cancelTask($this->getTaskId());
                 return false;
             }
             $this->timer--;
-            $player->sendSubtitle(C::WHITE . "Going to Events..");
+            $player->sendTip(C::WHITE . "Going to Events..");
             if ($this->timer <= 0) {
                 // $loc = new Position(-1736, 86, -202, $level);
                 $player->teleport($level->getSafeSpawn());
