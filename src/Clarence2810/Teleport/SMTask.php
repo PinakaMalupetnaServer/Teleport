@@ -37,5 +37,6 @@ class SMTask extends Task
             $this->main->getScheduler()->cancelTask($this->getTaskId());
             return false;
         }
+        return 0;
     }
 }
