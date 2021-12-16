@@ -31,7 +31,7 @@ class SMTask extends Task
             $player->sendTip(C::WHITE . "Please wait.");
             $this->timer--;
             if ($this->timer <= 0) {
-                $player->transfer("gsrv.princepines.digital", 19130, $player->getName() . ": Transferred to SM")
+                $player->transfer("gsrv.princepines.digital", 19130, $player->getName() . ": Transferred to SM");
             }
         } else {
             $this->main->getScheduler()->cancelTask($this->getTaskId());
